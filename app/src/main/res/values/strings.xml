@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Login screen</string>
+    <string name="button_text">Create an account</string>
+    <string name="welcome_message">GreenFlag customer can \n create an account to access</string>
+    <string name="email_hint">example@mail.com</string>
+    <string name="criteria">Your password should have a minimum of 8 character and contain at least one number, one uppercase and lower case letter. You can use special characters.</string>
+    <string name="button_next">Next</string>
 </resources>

@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Log.d("a", "onCreate: ");
-        mButton1=findViewById(R.id.createaccount);
+        mButton1=findViewById(R.id.imageButton);
         mButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mIntent = new Intent(getBaseContext(),MainActivity2.class);
-                mIntent.putExtra("MY_DATA","WHATEVER");
+                //mIntent.putExtra("MY_DATA","WHATEVER");
 
                 startActivity(mIntent);
             }
