@@ -5,4 +5,7 @@
     <string name="email_hint">example@mail.com</string>
     <string name="criteria">Your password should have a minimum of 8 character and contain at least one number, one uppercase and lower case letter. You can use special characters.</string>
     <string name="button_next">Next</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="hint_password">See criteria below</string>
+    <string name="create_password">Create a password</string>
 </resources>
