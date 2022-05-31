@@ -1,14 +1,18 @@
 package com.enhanceit.loginscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.appsearch.GetSchemaResponse;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.regex.Pattern;
@@ -17,11 +21,12 @@ public class MainActivity2 extends AppCompatActivity {
     private boolean isEmailOk;
     private boolean isEmailExist;
     private boolean arePasswordsSimilar;
-    private boolean flagPasswordValidation;
+    private boolean isPasswordOk;
     private SharedPreferences shPrefs;
     private EditText initialPassword;
     private EditText repeatedPassword;
     private EditText emailField;
+    private Button nextBtn;
 
     public static final Pattern EMAIL_ADDRESS
             = Pattern.compile(
@@ -41,9 +46,12 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
         initialPassword = findViewById(R.id.originalPassword);
         repeatedPassword = findViewById(R.id.repeatedPassword);
         emailField = findViewById(R.id.inputEmail);
+        nextBtn = findViewById(R.id.nex_btn);
+
         shPrefs = getSharedPreferences("MY_SHARED_PREF", MODE_PRIVATE);
         emailField.addTextChangedListener(new TextWatcher() {
 
@@ -61,17 +69,20 @@ public class MainActivity2 extends AppCompatActivity {
                 isEmailOk = emailValidation(userEmail);
                 if (isEmailOk) {
                     emailField.setError(null);
-                    shPrefs.edit()
-                            .putString("EMAIL", userEmail)
-                            .apply();
-                    ;
+                    emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
+                    emailField.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
+                    /**
+                     shPrefs.edit()
+                     .putString("EMAIL", userEmail)
+                     .apply();
+                     */
                 } else {
                     emailField.setError("Enter a valid email");
+                    emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_red));
 
-                    shPrefs.getString("EMAOIL", null);
+                    //shPrefs.getString("EMAOIL", null);
 
                 }
-                // emailField.
             }
         });
 
@@ -89,13 +100,15 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String firstPass = initialPassword.getText().toString();
+                isPasswordOk = passwordValidation(firstPass);
+                if (isPasswordOk) {
+                    initialPassword.setError(null);
+                    initialPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
 
-               if (passwordValidation(firstPass)){
-
-                   initialPassword.setError(null);
-               }else{
-                   initialPassword.setError("Enter a valid password");
-               }
+                } else {
+                    initialPassword.setError("Enter a valid password");
+                    initialPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_red));
+                }
             }
         });
 
@@ -108,9 +121,17 @@ public class MainActivity2 extends AppCompatActivity {
                 arePasswordsSimilar = passwordValidation(firstPass, secondPass);
 
                 if (arePasswordsSimilar) {
+                    repeatedPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
                     repeatedPassword.setError(null);
+                    if (isEmailOk && isPasswordOk) {
+                        nextBtn.setEnabled(true);
+                    } else {
+                        nextBtn.setEnabled(false);
+                    }
                 } else {
+                    repeatedPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_red));
                     repeatedPassword.setError("Your passwords doesn't match");
+
                 }
 
 

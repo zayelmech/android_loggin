@@ -7,6 +7,7 @@
     android:background="@color/black"
     android:orientation="vertical"
     android:padding="20dp"
+
     tools:context=".MainActivity2">
 
     <TextView
@@ -18,16 +19,21 @@
 
     <EditText
         android:id="@+id/inputEmail"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="12dp"
         android:autofillHints="emailAddress"
         android:background="@color/white"
         android:drawableStart="@drawable/vector_person"
-        android:drawablePadding="10dp"
+        android:drawablePadding="12dp"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress"
-        android:textColor="@color/black" />
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
+        tools:background="@drawable/edit_text_border_green"
+        tools:drawableEnd="@drawable/tick"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:layout_width="match_parent"
@@ -38,6 +44,7 @@
 
     <EditText
         android:id="@+id/originalPassword"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="12dp"
@@ -45,10 +52,17 @@
         android:drawableStart="@drawable/vector_lock"
         android:drawablePadding="10dp"
         android:hint="@string/hint_password"
+
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
 
-        android:textColor="@color/black" />
+        tools:background="@drawable/edit_text_border_red"
+
+        tools:drawableEnd="@drawable/tick"
+
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:layout_width="match_parent"
@@ -61,6 +75,7 @@
 
     <EditText
         android:id="@+id/repeatedPassword"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
@@ -68,10 +83,15 @@
         android:drawablePadding="10dp"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:paddingEnd="10dp"
         android:textColor="@color/black"
 
+        tools:background="@drawable/edit_text_border_red"
 
-        />
+        tools:drawableEnd="@drawable/tick"
+
+
+        tools:ignore="RtlSymmetry" />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -94,6 +114,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nex_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_button_background"

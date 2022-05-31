@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/default_user_image_background.xml" value="0.2415" />
+        <entry key="app/src/main/res/drawable/edit_text_border_green.xml" value="0.2535" />
+        <entry key="app/src/main/res/drawable/edit_text_border_red.xml" value="0.2535" />
         <entry key="app/src/main/res/drawable/vector_person.xml" value="0.115" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20032894736842105" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.20032894736842105" />

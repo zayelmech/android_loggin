@@ -18,4 +18,10 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="Theme.LoginScreen.EmailStyle" parent="Theme.LoginScreen">
+
+        <item name="android:drawableEnd">@drawable/tick</item>
+        <item name="android:drawableStart">@drawable/vector_person</item>
+    </style>
 </resources>
