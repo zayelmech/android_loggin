@@ -8,4 +8,9 @@
     <string name="repeat_password">Repeat password</string>
     <string name="hint_password">See criteria below</string>
     <string name="create_password">Create a password</string>
+    <string name="logoDescription">Company\'s logo</string>
+    <string name="first_benefit">Car health updates</string>
+    <string name="second_benefit">Request a rescue online</string>
+    <string name="third_benefit">Policy information</string>
+    <string name="email_address_tittle">Email address</string>
 </resources>

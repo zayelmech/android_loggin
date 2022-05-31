@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mIntent = new Intent(getBaseContext(),MainActivity2.class);
                 //mIntent.putExtra("MY_DATA","WHATEVER");
-
                 startActivity(mIntent);
             }
         });
