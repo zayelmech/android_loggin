@@ -6,16 +6,30 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.EditText;
 
+import java.util.regex.Pattern;
+
 public class MainActivity2 extends AppCompatActivity {
-    private boolean flagEmailValidation;
-    private boolean flagPasswordsSimilar;
+    private boolean isEmailOk;
+    private boolean isEmailExist;
+    private boolean arePasswordsSimilar;
     private boolean flagPasswordValidation;
 
     private EditText initialPassword;
     private EditText repeatedPassword;
     private EditText emailField;
+    public static final Pattern EMAIL_ADDRESS
+            = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +51,15 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String userEmail = emailField.getText().toString();
+                isEmailOk = emailValidation(userEmail);
+                if (isEmailOk) {
+                    emailField.setError(null);
 
-               // emailField.
+                } else {
+                    emailField.setError("Enter a valid email");
+
+                }
+                // emailField.
             }
         });
         repeatedPassword.addTextChangedListener(new TextWatcher() {
@@ -47,9 +68,9 @@ public class MainActivity2 extends AppCompatActivity {
 
                 String firstPass = initialPassword.getText().toString();
                 String secondPass = repeatedPassword.getText().toString();
-                boolean flag = passwordValidation(firstPass, secondPass);
+                 arePasswordsSimilar = passwordValidation(firstPass, secondPass);
 
-                if (flag) {
+                if (arePasswordsSimilar) {
                     repeatedPassword.setError(null);
                 } else {
                     repeatedPassword.setError("Your passwords doesn't match");
@@ -75,6 +96,11 @@ public class MainActivity2 extends AppCompatActivity {
             return false;
         }
 
+    }
+
+    private boolean emailValidation(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 
     @Override
