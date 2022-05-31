@@ -2,6 +2,8 @@ package com.enhanceit.loginscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.appsearch.GetSchemaResponse;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,10 +18,11 @@ public class MainActivity2 extends AppCompatActivity {
     private boolean isEmailExist;
     private boolean arePasswordsSimilar;
     private boolean flagPasswordValidation;
-
+    private SharedPreferences shPrefs;
     private EditText initialPassword;
     private EditText repeatedPassword;
     private EditText emailField;
+
     public static final Pattern EMAIL_ADDRESS
             = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -31,6 +34,9 @@ public class MainActivity2 extends AppCompatActivity {
                     ")+"
     );
 
+    public static final Pattern PASSWORD_PATTERN
+            = Pattern.compile("(?=.*?[A-Z])" + "(?=.*?[a-z])" + "(?=.*?[0-9])" + ".{8,}");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +44,9 @@ public class MainActivity2 extends AppCompatActivity {
         initialPassword = findViewById(R.id.originalPassword);
         repeatedPassword = findViewById(R.id.repeatedPassword);
         emailField = findViewById(R.id.inputEmail);
-
+        shPrefs = getSharedPreferences("MY_SHARED_PREF", MODE_PRIVATE);
         emailField.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -54,21 +61,51 @@ public class MainActivity2 extends AppCompatActivity {
                 isEmailOk = emailValidation(userEmail);
                 if (isEmailOk) {
                     emailField.setError(null);
-
+                    shPrefs.edit()
+                            .putString("EMAIL", userEmail)
+                            .apply();
+                    ;
                 } else {
                     emailField.setError("Enter a valid email");
+
+                    shPrefs.getString("EMAOIL", null);
 
                 }
                 // emailField.
             }
         });
+
+        initialPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String firstPass = initialPassword.getText().toString();
+
+               if (passwordValidation(firstPass)){
+
+                   initialPassword.setError(null);
+               }else{
+                   initialPassword.setError("Enter a valid password");
+               }
+            }
+        });
+
         repeatedPassword.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
 
                 String firstPass = initialPassword.getText().toString();
                 String secondPass = repeatedPassword.getText().toString();
-                 arePasswordsSimilar = passwordValidation(firstPass, secondPass);
+                arePasswordsSimilar = passwordValidation(firstPass, secondPass);
 
                 if (arePasswordsSimilar) {
                     repeatedPassword.setError(null);
@@ -90,17 +127,19 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private static boolean passwordValidation(String pass1, String pass2) {
-        if (pass1.equals(pass2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return pass1.equals(pass2);
 
     }
 
     private boolean emailValidation(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
+    }
+
+
+    private boolean passwordValidation(String secret) {
+        Pattern pattern = PASSWORD_PATTERN;
+        return pattern.matcher(secret).matches();
     }
 
     @Override

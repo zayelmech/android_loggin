@@ -98,8 +98,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_button_background"
         android:backgroundTintMode="src_over"
-        android:clickable="false"
+        android:enabled="false"
         android:text="@string/button_next"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:visibility="visible" />
+
 </LinearLayout>
