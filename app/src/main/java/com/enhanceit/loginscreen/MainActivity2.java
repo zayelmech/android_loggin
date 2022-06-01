@@ -3,18 +3,25 @@ package com.enhanceit.loginscreen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.appsearch.GetSchemaResponse;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -52,7 +59,26 @@ public class MainActivity2 extends AppCompatActivity {
         emailField = findViewById(R.id.inputEmail);
         nextBtn = findViewById(R.id.nex_btn);
 
+
+        //emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
+
         shPrefs = getSharedPreferences("MY_SHARED_PREF", MODE_PRIVATE);
+
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextBtn.setTextColor(Color.WHITE);
+                if (!isEmailExist) {
+                    String emailArray = shPrefs.getString("EMAIL", null);
+                    String newArray = emailArray + "," + emailField.getText().toString();
+
+                    shPrefs.edit()
+                            .putString("EMAIL", newArray)
+                            .apply();
+                }
+            }
+        });
         emailField.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -67,22 +93,24 @@ public class MainActivity2 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String userEmail = emailField.getText().toString();
                 isEmailOk = emailValidation(userEmail);
+
                 if (isEmailOk) {
                     emailField.setError(null);
                     emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
-                    emailField.setCompoundDrawablesWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
-                    /**
-                     shPrefs.edit()
-                     .putString("EMAIL", userEmail)
-                     .apply();
-                     */
+                    emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
+                    isEmailExist = checkEmail(userEmail);
+                    if (isEmailExist) {
+                        emailField.setError("This email already exist");
+                    } else {
+                        emailField.setError(null);
+                    }
                 } else {
                     emailField.setError("Enter a valid email");
                     emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_red));
-
-                    //shPrefs.getString("EMAOIL", null);
+                    emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, 0, 0);
 
                 }
+
             }
         });
 
@@ -119,12 +147,14 @@ public class MainActivity2 extends AppCompatActivity {
                 String firstPass = initialPassword.getText().toString();
                 String secondPass = repeatedPassword.getText().toString();
                 arePasswordsSimilar = passwordValidation(firstPass, secondPass);
-
-                if (arePasswordsSimilar) {
+                String userEmail = emailField.getText().toString();
+                if (arePasswordsSimilar && !firstPass.isEmpty()) {
                     repeatedPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
                     repeatedPassword.setError(null);
-                    if (isEmailOk && isPasswordOk) {
+
+                    if (isEmailOk && isPasswordOk && !isEmailExist) {
                         nextBtn.setEnabled(true);
+
                     } else {
                         nextBtn.setEnabled(false);
                     }
@@ -137,14 +167,31 @@ public class MainActivity2 extends AppCompatActivity {
 
             }
 
+
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-
         });
 
+    }
+
+    private boolean checkEmail(String userEmail) {
+
+        boolean flag;
+        String mailsArray;
+        mailsArray = shPrefs.getString("EMAIL", null);
+
+        if (!mailsArray.isEmpty()) {
+            flag = mailsArray.contains(userEmail);
+        } else {
+            flag = false;
+        }
+
+        Log.d("MAILS--->", mailsArray);
+
+        return flag;
     }
 
     private static boolean passwordValidation(String pass1, String pass2) {

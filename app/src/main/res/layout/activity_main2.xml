@@ -10,118 +10,129 @@
 
     tools:context=".MainActivity2">
 
-    <TextView
+    <ScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/email_address_tittle"
-        android:textColor="@color/white"
-        android:textSize="22sp" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/inputEmail"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
-        android:autofillHints="emailAddress"
-        android:background="@color/white"
-        android:drawableStart="@drawable/vector_person"
-        android:drawablePadding="12dp"
-        android:hint="@string/email_hint"
-        android:inputType="textEmailAddress"
-        android:paddingEnd="10dp"
-        android:textColor="@color/black"
-        tools:background="@drawable/edit_text_border_green"
-        tools:drawableEnd="@drawable/tick"
-        tools:ignore="RtlSymmetry" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/create_password"
-        android:textColor="@color/white"
-        android:textSize="22sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email_address_tittle"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
 
-    <EditText
-        android:id="@+id/originalPassword"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
-        android:background="@color/white"
-        android:drawableStart="@drawable/vector_lock"
-        android:drawablePadding="10dp"
-        android:hint="@string/hint_password"
+            <EditText
+                android:id="@+id/inputEmail"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="12dp"
+                android:autofillHints="emailAddress"
+                android:background="@color/white"
+                android:drawableStart="@drawable/vector_person"
+                android:drawablePadding="22dp"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                tools:background="@drawable/edit_text_border_green"
+                tools:drawableEnd="@drawable/tick" />
 
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:paddingEnd="10dp"
-        android:textColor="@color/black"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_password"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
 
-        tools:background="@drawable/edit_text_border_red"
+            <EditText
+                android:id="@+id/originalPassword"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/vector_lock"
+                android:drawablePadding="10dp"
+                android:hint="@string/hint_password"
 
-        tools:drawableEnd="@drawable/tick"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:paddingEnd="10dp"
+                android:textColor="@color/black"
 
-        tools:ignore="RtlSymmetry" />
+                tools:background="@drawable/edit_text_border_red"
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/repeat_password"
-        android:textColor="@color/white"
-        android:textSize="22sp"
+                tools:drawableEnd="@drawable/tick"
 
-        />
+                tools:ignore="RtlSymmetry" />
 
-    <EditText
-        android:id="@+id/repeatedPassword"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        android:drawableStart="@drawable/vector_lock"
-        android:drawablePadding="10dp"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:paddingEnd="10dp"
-        android:textColor="@color/black"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repeat_password"
+                android:textColor="@color/white"
+                android:textSize="22sp"
 
-        tools:background="@drawable/edit_text_border_red"
+                />
 
-        tools:drawableEnd="@drawable/tick"
+            <EditText
+                android:id="@+id/repeatedPassword"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/vector_lock"
+                android:drawablePadding="10dp"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:paddingEnd="10dp"
+                android:textColor="@color/black"
 
+                tools:background="@drawable/edit_text_border_red"
 
-        tools:ignore="RtlSymmetry" />
-
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_launcher"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp" />
+                tools:drawableEnd="@drawable/tick"
 
 
-    <TextView
-        style="@style/Theme.LoginScreen.EditTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/criteria"
+                tools:ignore="RtlSymmetry" />
 
-        />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/nex_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_button_background"
-        android:backgroundTintMode="src_over"
-        android:enabled="false"
-        android:text="@string/button_next"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:visibility="visible" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
+
+            <TextView
+                style="@style/Theme.LoginScreen.EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/criteria"
+
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nex_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_button_background"
+                android:backgroundTintMode="src_over"
+                android:enabled="false"
+                android:text="@string/button_next"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="28sp"
+                android:visibility="visible" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
