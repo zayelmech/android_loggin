@@ -11,18 +11,17 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button mButton1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("a", "onCreate: ");
-        mButton1=findViewById(R.id.imageButton);
+        Log.d("ACTIVITY -->", "onCreate: ");
+        Button mButton1 = findViewById(R.id.imageButton);
         mButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(getBaseContext(),MainActivity2.class);
+                Intent mIntent = new Intent(getBaseContext(), MainActivity2.class);
                 //mIntent.putExtra("MY_DATA","WHATEVER");
                 startActivity(mIntent);
             }
@@ -32,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
     }
 }

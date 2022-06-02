@@ -13,4 +13,5 @@
     <string name="second_benefit">Request a rescue online</string>
     <string name="third_benefit">Policy information</string>
     <string name="email_address_tittle">Email address</string>
+    <string name="hint_repeated_password">Enter password again</string>
 </resources>
