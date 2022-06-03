@@ -11,7 +11,10 @@
         <entry key="app/src/main/res/drawable/vector_lock.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/vector_person.xml" value="0.115" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20032894736842105" />
-        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.15723684210526315" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.10263157894736842" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.2019736842105263" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2019736842105263" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2019736842105263" />
       </map>
     </option>
   </component>

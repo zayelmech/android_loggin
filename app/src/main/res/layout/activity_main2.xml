@@ -34,7 +34,6 @@
             android:layout_height="50dp"
             android:autofillHints="emailAddress"
             android:background="@color/white"
-            android:drawableStart="@drawable/vector_person"
             android:drawablePadding="22dp"
             android:hint="@string/email_hint"
             android:importantForAutofill="auto"
@@ -45,7 +44,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:background="@drawable/edit_text_border_green"
-            tools:drawableEnd="@drawable/tick" />
+            tools:drawableEnd="@drawable/tick"
+            tools:drawableStart="@drawable/vector_person" />
 
         <TextView
             android:id="@+id/textView3"
@@ -65,19 +65,19 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:drawableStart="@drawable/vector_lock"
             android:drawablePadding="10dp"
             android:hint="@string/hint_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingEnd="10dp"
             android:textColor="@color/black"
-
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
             tools:background="@drawable/edit_text_border_red"
             tools:drawableEnd="@drawable/tick"
+            tools:drawableStart="@drawable/vector_lock"
             tools:ignore="RtlSymmetry" />
 
         <TextView
@@ -100,7 +100,6 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:drawableStart="@drawable/vector_lock"
             android:drawablePadding="10dp"
             android:hint="@string/hint_repeated_password"
             android:importantForAutofill="no"
@@ -112,6 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             tools:background="@drawable/edit_text_border_red"
             tools:drawableEnd="@drawable/tick"
+            tools:drawableStart="@drawable/vector_lock"
             tools:ignore="RtlSymmetry" />
 
 
@@ -125,6 +125,7 @@
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
             app:civ_border_color="#FF000000"
             app:civ_border_width="2dp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -3,6 +3,7 @@ package com.enhanceit.loginscreen;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -15,7 +16,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -28,6 +31,8 @@ public class MainActivity2 extends AppCompatActivity {
     private EditText repeatedPassword;
     private EditText emailField;
     private Button nextBtn;
+    public static final String EXTRA_MESSAGE =
+            "com.enhanceit.android.Loginscreen.extra.MESSAGE";
 
     public static final Pattern PASSWORD_PATTERN
             = Pattern.compile("(?=.*?[A-Z])" + "(?=.*?[a-z])" + "(?=.*?[0-9])" + ".{8,}");
@@ -42,6 +47,9 @@ public class MainActivity2 extends AppCompatActivity {
         emailField = findViewById(R.id.inputEmail);
         nextBtn = findViewById(R.id.nex_btn);
 
+        emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, 0, 0);
+        initialPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_lock, 0, 0, 0);
+        repeatedPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_lock, 0, 0, 0);
 
         //emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
 
@@ -56,17 +64,28 @@ public class MainActivity2 extends AppCompatActivity {
                 if (!isEmailExist) {
                     String emailArray = shPrefs.getString("EMAIL", null);
                     String newArray;
-                    if (emailArray != null){
-                         newArray = emailArray + "," + emailField.getText().toString();
-                    }else{
+                    if (emailArray != null) {
+                        newArray = emailArray + "," + emailField.getText().toString();
+                    } else {
                         newArray = emailField.getText().toString();
                     }
                     shPrefs.edit()
                             .putString("EMAIL", newArray)
                             .apply();
+
+                    Intent xIntent = new Intent(getBaseContext(), Welcome.class);
+                    xIntent.putExtra(EXTRA_MESSAGE,emailField.getText().toString());
+                    startActivity(xIntent);
+/*
+                        Set<String> something ={"s","a"};
+
+                    shPrefs.edit().putStringSet("EMAILS",something  )
+                            .putString("EMAIL", newArray)
+                            .apply();*/
                 }
             }
         });
+
         emailField.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -84,14 +103,20 @@ public class MainActivity2 extends AppCompatActivity {
 
                 if (isEmailOk) {
                     emailField.setError(null);
-                    emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
-                    emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
                     isEmailExist = checkEmail(userEmail);
-                    if (isEmailExist) {
-                        emailField.setError("This email already exist");
-                    } else {
+                    if (!isEmailExist) {
+
+                        emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
+                        //emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, 0, 0);
+                        emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, R.drawable.tick, 0);
+
                         emailField.setError(null);
                         unlockButton();
+                    } else {
+                        emailField.setError("This email already exist");
+                        emailField.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_red));
+                        emailField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_person, 0, 0, 0);
+
                     }
                 } else {
                     emailField.setError("Enter a valid email");
@@ -121,6 +146,9 @@ public class MainActivity2 extends AppCompatActivity {
                 if (isPasswordOk) {
                     initialPassword.setError(null);
                     initialPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
+                    //initialPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_lock, 0, 0, 0);
+                    initialPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_lock, 0, R.drawable.tick, 0);
+
                     unlockButton();
 
                 } else {
@@ -140,6 +168,9 @@ public class MainActivity2 extends AppCompatActivity {
                 //String userEmail = emailField.getText().toString();
                 if (arePasswordsSimilar && !firstPass.isEmpty()) {
                     repeatedPassword.setBackground(ContextCompat.getDrawable(getBaseContext(), R.drawable.edit_text_border_green));
+                    //repeatedPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_lock, 0, 0, 0);
+                    repeatedPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.vector_lock, 0, R.drawable.tick, 0);
+
                     repeatedPassword.setError(null);
                     unlockButton();
 
@@ -202,7 +233,6 @@ public class MainActivity2 extends AppCompatActivity {
         return pattern.matcher(email).matches();
     }
 
-
     private boolean passwordValidation(String secret) {
         return PASSWORD_PATTERN.matcher(secret).matches();
     }
@@ -213,4 +243,5 @@ public class MainActivity2 extends AppCompatActivity {
         int widthPx = Resources.getSystem().getDisplayMetrics().widthPixels;
         Log.d("WIDTH---->", widthPx + "px");
     }
+
 }
